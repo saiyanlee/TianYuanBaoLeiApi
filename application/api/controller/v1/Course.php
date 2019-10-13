@@ -10,6 +10,8 @@ namespace app\api\controller\v1;
 
 
 use app\api\validate\IDMustBePositiveInt;
+use app\api\model\Course as CourseModel;
+use app\lib\exception\CourseMissException;
 
 class Course
 {
@@ -18,16 +20,16 @@ class Course
     {
         // check stuid
         (new IDMustBePositiveInt ())->gocheck();
-//        $data = [
-//            'stuid' => $stuid
-//        ];
-//        $validate = new IDMustBePositiveInt ();
-//        if ($validate->batch()->check($data)) {
-//            echo 'OK';
-//        } else {
-//            dump($validate->getError());
-//        }
 
-        echo $stuid.'Hello World!';
+        // get course
+        $course = CourseModel::getCourseByStuid($stuid);
+
+        // check course
+        if (!$course)
+        {
+            throw new CourseMissException();
+        }
+
+        return $course;
     }
 }
