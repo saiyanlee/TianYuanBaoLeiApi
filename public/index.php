@@ -19,3 +19,12 @@ define('LOG_PATH', __DIR__ . '/../log/');
 
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';
+
+// 开启SQL日志记录 （调试与开发时开启）
+\think\Log::init([
+    'type'  => 'File',
+    // 日志保存目录
+    'path'  => LOG_PATH,
+    // 日志记录级别
+    'level' => ['sql'],
+]);
