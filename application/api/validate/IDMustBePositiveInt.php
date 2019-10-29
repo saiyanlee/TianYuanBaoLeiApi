@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/10/13 0013
- * Time: 8:25
- */
 
 namespace app\api\validate;
 

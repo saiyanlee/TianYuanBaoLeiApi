@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/10/13 0013
- * Time: 8:02
- */
 
 namespace app\api\controller\v1;
 
@@ -22,7 +16,8 @@ class Course
         (new IDMustBePositiveInt ())->gocheck();
 
         // get course
-        $course = CourseModel::getCourseByStuid($stuid);
+//        $course = CourseModel::getCourseByStuid($stuid);
+        $course = (new \app\lib\source\Course())->getCourse();
 
         // check course
         if (!$course)
