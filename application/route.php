@@ -12,4 +12,4 @@
 use think\Route;
 
 Route::get('api/:version/course/:stuid','api/:version.Course/getCourse/');
-Route::post('api/:version/course/','api/:version.Course/getCourse/');
+Route::post('api/:version/course/:week','api/:version.Course/getCourse/');

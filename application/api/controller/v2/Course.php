@@ -8,17 +8,18 @@ use app\api\validate\PersonalMsg;
 use app\lib\exception\CourseMissException;
 use app\lib\source\Course as CourseRequest;
 use think\Request;
+use app\api\model\Course as CourseModel;
 
 class Course
 {
-    public function getCourse ()
+    public function getCourse ($week)
     {
 
         // check stuid
         (new PersonalMsg())->gocheck();
 
         // get course
-        $course = $this->courseRequest();
+        $course = $this->courseRequest($week);
 
 
         // check course
@@ -28,18 +29,39 @@ class Course
             throw $e;
         }
 
-        return json($course);
+        return ($course);
     }
 
-    protected function courseRequest ()
+    protected function courseRequest ($week)
     {
-        // get
+        // get params
         $stuid = Request::instance()->post('stuid');
         $stupasswd = Request::instance()->post('stupasswd');
 
-        session_start();
-        $res = (new CourseRequest())->getCourse();
+        // change
+        $stuidStr = strval($stuid);
+        $stupasswdStr = strval($stupasswd);
 
-        return $res;
+        // get data from api and make a loop
+        session_start();
+//        $res = (new CourseRequest($stuidStr,$stupasswdStr))->getCourse();
+        $flag = true;
+        while ($flag)
+        {
+            $res = (new CourseRequest($stuidStr,$stupasswdStr))->getCourse($week);
+            if ($res) {
+                break;
+            }
+        }
+
+        //check
+//        if (!$res) {
+//            throw new CourseMissException();
+//        }
+
+
+        $courseData = CourseModel::getCourseData($res);
+
+        return json_encode($courseData);
     }
 }

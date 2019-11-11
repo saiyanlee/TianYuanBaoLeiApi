@@ -31,8 +31,15 @@ class JwglLogin extends Recognition
 
     public $yzm;
 
-    public function __construct()
+    private $stuid;
+
+    private $stupasswd;
+
+    public function __construct($stuid,$stupasswd)
     {
+
+        $this -> stuid = $stuid;
+        $this -> stupasswd = $stupasswd;
 
         $this -> id = session_id();
         $_SESSION['id'] = $this -> id;
@@ -78,8 +85,8 @@ class JwglLogin extends Recognition
     {
         $this -> yzm = $this->run();
         $post = array(
-            'account' => '20170406430121',
-            'pwd' => '260033260033',
+            'account' => $this -> stuid,
+            'pwd' => $this -> stupasswd,
             'verifycode' => $this -> yzm,
         );
         $host = "http://jwgl.thxy.cn/login!doLogin.action";
@@ -97,16 +104,16 @@ class JwglLogin extends Recognition
         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($post));        //要执行的信息
         $res = curl_exec($curl);
         curl_close($curl);
-//        return json_decode($res, true);
-        return $res;
+        return json_decode($res, true);
+//        return $res;
     }
 
-    public function courseRequest ()
+    public function courseRequest ($week)
     {
         // xsbjkbcx!getKbRq.action?xnxqdm=
         // 'http://jwgl.thxy.cn/xsgrkbcx!getXsgrbkList.action';
         // http://jwgl.thxy.cn/xsgrkbcx!xskbList.action?xnxqdm=201901&zc=2
-        $host = "http://jwgl.thxy.cn/xsgrkbcx!getKbRq.action?xnxqdm=201901&zc=10";
+        $host = "http://jwgl.thxy.cn/xsgrkbcx!getKbRq.action?xnxqdm=201901&zc=".$week;
         $curl = curl_init();
         curl_setopt($curl,CURLOPT_URL,$host);
         curl_setopt($curl, CURLOPT_USERAGENT, $this->UserAgent);
