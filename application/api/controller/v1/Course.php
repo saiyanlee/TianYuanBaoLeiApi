@@ -13,18 +13,22 @@ class Course
     public function getCourse ($stuid)
     {
         // check stuid
-        (new IDMustBePositiveInt ())->gocheck();
+//        (new IDMustBePositiveInt ())->gocheck();
 
         // get course
 //        $course = CourseModel::getCourseByStuid($stuid);
-        $course = (new \app\lib\source\Course())->getCourse();
+//        $course = (new \app\lib\source\Course())->getCourse();
 
         // check course
-        if (!$course)
-        {
-            throw new CourseMissException();
-        }
+//        if (!$course)
+//        {
+//            throw new CourseMissException();
+//        }
 
-        return $course;
+//        return $course;
+
+        session_start();
+        $id = session_id();
+        echo $id;
     }
 }

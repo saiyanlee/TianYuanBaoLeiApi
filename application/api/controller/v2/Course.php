@@ -16,7 +16,7 @@ class Course
     {
 
         // check stuid
-        (new PersonalMsg())->gocheck();
+        (new PersonalMsg())->goCheck();
 
         // get course
         $course = $this->courseRequest($week);

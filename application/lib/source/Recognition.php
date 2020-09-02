@@ -2,7 +2,7 @@
 
 
 namespace app\lib\source;
-require (__DIR__ .'\dict_array.php');
+require (__DIR__ .'/dict_array.php');
 
 class Recognition
 {

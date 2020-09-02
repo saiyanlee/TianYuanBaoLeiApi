@@ -10,7 +10,7 @@ use app\lib\exception\ParameterException;
 
 class BaseValidate extends Validate
 {
-    public function gocheck ()
+    public function goCheck ()
     {
         // get all param
         $params = Request::instance() -> param();

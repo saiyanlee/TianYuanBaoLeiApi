@@ -11,5 +11,9 @@
 
 use think\Route;
 
-Route::get('api/:version/course/:stuid','api/:version.Course/getCourse/');
-Route::post('api/:version/course/:week','api/:version.Course/getCourse/');
+// v2
+Route::get('api/v2/course/:stuid','api/v2.Course/getCourse/');
+Route::post('api/v2/course/:week','api/v2.Course/getCourse/');
+
+// v3
+Route::post('api/v3/course/','api/v3.Course/getCourse/');
